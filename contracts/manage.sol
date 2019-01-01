@@ -49,6 +49,7 @@ contract Manage is Ownable {
     struct DonateInfo {
         address contractAddr;
         string materialsAddr;
+        string materialHash;
     }
 
     mapping(address => DonateInfo) public contracts;
@@ -57,14 +58,15 @@ contract Manage is Ownable {
         
     }
 
-    function addDonor(address donorAddr, address contractAddr, string materialsAddr) onlyOwner {
+    function addDonor(address donorAddr, address contractAddr, string materialsAddr, string materialHash) onlyOwner {
         AddDonor(msg.sender, donorAddr, contractAddr);
         contracts[donorAddr] = DonateInfo(contractAddr, materialsAddr);
     }
 
-    function getDonor(address donorAddr) returns (address contractAddr, string materialsAddr) {
+    function getDonor(address donorAddr) returns (address contractAddr, string materialsAddr, string materialHash) {
         contractAddr = contracts[donorAddr].contractAddr;
         materialsAddr = contracts[donorAddr].materialsAddr;
+        materialHash = contracts[donorAddr].materialHash
     }
 
     function resolve() onlyOwner {
