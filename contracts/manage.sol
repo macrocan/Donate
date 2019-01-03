@@ -60,7 +60,7 @@ contract Manage is Ownable {
 
     function addDonor(address donorAddr, address contractAddr, string materialsAddr, string materialHash) onlyOwner {
         AddDonor(msg.sender, donorAddr, contractAddr);
-        contracts[donorAddr] = DonateInfo(contractAddr, materialsAddr);
+        contracts[donorAddr] = DonateInfo(contractAddr, materialsAddr, materialHash);
     }
 
     function getDonor(address donorAddr) returns (address contractAddr, string materialsAddr, string materialHash) {
