@@ -1,5 +1,6 @@
 import * as types from '../types'
 import getTronWeb from '../../util/get-tron-web'
+import * as factory from '../../util/contract/donate-factory'
 
 /**
  * App通用配置
@@ -9,8 +10,9 @@ const state = {
     installed: false,
     address: null,
     balance: null,
-    error: null
+    instance: null
   },
+  factoryInstance: null,
 }
 
 const actions = {
@@ -25,8 +27,19 @@ const actions = {
       console.error('error in action registerWeb3', e);
       return Promise.reject(e);
     }
+  },
+  async GET_FACTORY_INSTANCE({ state, commit }) {
+    const tronWeb = state.tronData.instance
+    const instance = await tronWeb.contract().at(factory.address)
+    commit('GET_FACTORY_INSTANCE', instance)
+  },
+  async GET_DEPLOYED_CONTRACT({ state }) {
+    const instance = state.factoryInstance
+    const array = await instance.getDeployedContracts().call()
+    console.log(array)
   }
 }
+
 
 const getters = {
 }
@@ -40,6 +53,9 @@ const mutations = {
     tronCopy.installed = result.installed
     tronCopy.instance = result.instance
     state.tronData = tronCopy
+  },
+  [types.GET_FACTORY_INSTANCE](state, payload) {
+    state.factoryInstance = payload
   }
 }
 

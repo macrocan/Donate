@@ -2,7 +2,6 @@
 let getTronWeb = async function () {
   const wait = function (){
     if (!window.tronWeb || !window.tronWeb.ready){
-      alert(tronWebState)
       setTimeout(wait,100);
     }
   }
