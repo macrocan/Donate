@@ -9,7 +9,7 @@ Below is framework
 
 # 合约接口说明
 
-管理合约有2个接口：
+manage.sol合约有2个接口：
 
 1、getdoner 用户获取特定求助人的求助信息 可以对外
 
