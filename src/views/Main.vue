@@ -28,10 +28,12 @@ export default {
     NavMenu,
     Header
   },
-  beforeCreate () {
+  async beforeCreate () {
     console.log('register tron web Action dispatched from Home.vue')
-    if (!this.$store.state.tronWeb.tronData.instance)
-      this.$store.dispatch('GET_TRON_INSTANCE')
+    if (!this.$store.state.tronWeb.tronData.instance){
+      await this.$store.dispatch('GET_TRON_INSTANCE')
+      await this.$store.dispatch('GET_FACTORY_INSTANCE')
+    }
   },
   computed: {
 

@@ -1,0 +1,4 @@
+const ABI = [{"constant":true,"name":"owner","outputs":[{"type":"address"}],"type":2,"stateMutability":2},{"name":"transferOwnership","inputs":[{"name":"newOwner","type":"address"}],"type":2,"stateMutability":3},{"name":"OwnershipTransferred","inputs":[{"indexed":true,"name":"previousOwner","type":"address"},{"indexed":true,"name":"newOwner","type":"address"}],"type":3},{"name":"createContract","inputs":[{"name":"_amount","type":"uint256"},{"name":"_title","type":"string"},{"name":"_desc","type":"string"},{"name":"_materialHash","type":"int256"},{"name":"_materialUrl","type":"string"},{"name":"_donateToAddr","type":"address"}],"type":2,"payable":true,"stateMutability":4},{"constant":true,"name":"getDeployedContracts","outputs":[{"type":"address[]"}],"type":2,"stateMutability":2}]
+const address = "TCAaQUWJFcVWiD6As3jNs6UeExn1HS1pCz"
+
+export {address, ABI}
