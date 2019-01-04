@@ -1,6 +1,7 @@
 import * as types from '../types'
 import getTronWeb from '../../util/get-tron-web'
 import * as factory from '../../util/contract/donate-factory'
+import * as donate from '../../util/contract/simple-donate'
 
 /**
  * App通用配置
@@ -52,7 +53,10 @@ const actions = {
       const address = '41' + state.deployedContract[index].substring(2)
       const base58 = tronWeb.address.fromHex(address)
       console.log(base58)
-      const instance = await tronWeb.contract().at(base58)
+      const contract = tronWeb.contract(donate.ABI)
+      console.log(contract)
+      const instance = await contract.at(base58)
+      console.log(instance)
       const info = await instance.donateInfo().call()
       commit('SET_CURRENT_CONTRACT', info)
     }else

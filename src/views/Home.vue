@@ -38,7 +38,7 @@ export default {
   },
   async beforeCreate () {
     console.log('register tron web Action dispatched from Home.vue')
-    if (this.$store.state.tronWeb.tronData.instance){
+    if (this.$store.state.web3.web3Data.web3Instance){
       await this.$store.dispatch('GET_DEPLOYED_CONTRACT')
     }
   },
@@ -59,7 +59,7 @@ export default {
       return Math.round(this.contracts.length / 2)
     },
     contracts() {
-      return this.$store.state.tronWeb.deployedContract
+      return this.$store.state.web3.deployedContract
     },
   }
 }
