@@ -71,7 +71,7 @@ contract SimpleDonateContract is BaseDonateContract{
 
    
    constructor(uint _amount, string _title, string _desc,int _materialHash,string _materialUrl, address _donateToAddr) public {
-      donateInfo.amount = _amount;
+      donateInfo.amount = _amount * 1 trx;
       donateInfo.title = _title;
       donateInfo.desc = _desc;
       donateInfo.materialHash = _materialHash;
