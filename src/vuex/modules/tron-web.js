@@ -13,7 +13,8 @@ const state = {
     instance: null
   },
   factoryInstance: null,
-  deployedContract: []
+  deployedContract: [],
+  contractInfo: null
 }
 
 const actions = {
@@ -44,6 +45,18 @@ const actions = {
     const {amount, title, desc, materialHash, materialUrl, donateToAddr} = form
     const result = await instance.createContract(amount, title, desc, materialHash, materialUrl, donateToAddr).send()
     console.log(result)
+  },
+  async SET_CURRENT_CONTRACT({ state, commit}, index) {
+    if (index < state.deployedContract.length){
+      const tronWeb = state.tronData.instance
+      const address = '41' + state.deployedContract[index].substring(2)
+      const base58 = tronWeb.address.fromHex(address)
+      console.log(base58)
+      const instance = await tronWeb.contract().at(base58)
+      const info = await instance.donateInfo().call()
+      commit('SET_CURRENT_CONTRACT', info)
+    }else
+      console.error('invalid index', index)
   }
 }
 
@@ -66,7 +79,9 @@ const mutations = {
   },
   [types.GET_DEPLOYED_CONTRACT](state, array) {
     state.deployedContract = array
-    //console.log(state.deployedContract)
+  },
+  [types.SET_CURRENT_CONTRACT](state, info) {
+    state.contractInfo = info
   }
 }
 

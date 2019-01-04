@@ -5,7 +5,7 @@
         <el-card class="box-card">
           <div slot="header" class="clearfix">
             <span>项目{{row * 2 - 2}}</span>
-            <el-button style="float: right; padding: 3px 0" type="text">操作按钮</el-button>
+            <el-button @click="select(row * 2 - 2)" style="float: right; padding: 3px 0" type="text">查看</el-button>
           </div>
           <div class="text item">
             {{contracts[row * 2 - 2]}}
@@ -16,7 +16,7 @@
         <el-card class="box-card">
           <div slot="header" class="clearfix">
             <span>项目{{row * 2 - 1}}</span>
-            <el-button style="float: right; padding: 3px 0" type="text">操作按钮</el-button>
+              <el-button @click="select(row * 2 - 1)" style="float: right; padding: 3px 0" type="text">查看</el-button>
           </div>
           <div class="text item">
             {{contracts[row * 2 - 1]}}
@@ -47,6 +47,11 @@ export default {
   methods: {
     isShow(index){
       return (index < this.contracts.length)
+    },
+    select(index){
+      this.$store.dispatch('SET_CURRENT_CONTRACT', index).then(() =>{
+        this.$router.push('/donate')
+      })
     }
   },
   computed: {
