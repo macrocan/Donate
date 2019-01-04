@@ -39,7 +39,6 @@ export default {
   async beforeCreate () {
     console.log('register tron web Action dispatched from Home.vue')
     if (this.$store.state.web3.web3Data.web3Instance){
-      this.$store.dispatch('GET_FACTORY_INSTANCE')
       await this.$store.dispatch('GET_DEPLOYED_CONTRACT')
     }
   },
