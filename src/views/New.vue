@@ -59,7 +59,7 @@
           if (valid) {
             this.$store.dispatch('CREATE_CONTRACT', this.form)
           } else {
-            console.log('error submit!!');
+            alert('error submit!!');
             return false;
           }
         });

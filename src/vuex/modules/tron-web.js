@@ -13,6 +13,7 @@ const state = {
     instance: null
   },
   factoryInstance: null,
+  deployedContract: []
 }
 
 const actions = {
@@ -33,10 +34,10 @@ const actions = {
     const instance = await tronWeb.contract().at(factory.address)
     commit('GET_FACTORY_INSTANCE', instance)
   },
-  async GET_DEPLOYED_CONTRACT({ state }) {
+  async GET_DEPLOYED_CONTRACT({ state, commit }) {
     const instance = state.factoryInstance
     const array = await instance.getDeployedContracts().call()
-    console.log(array)
+    commit('GET_DEPLOYED_CONTRACT', array)
   },
   async CREATE_CONTRACT({state}, form) {
     const instance = state.factoryInstance
@@ -62,6 +63,10 @@ const mutations = {
   },
   [types.GET_FACTORY_INSTANCE](state, payload) {
     state.factoryInstance = payload
+  },
+  [types.GET_DEPLOYED_CONTRACT](state, array) {
+    state.deployedContract = array
+    //console.log(state.deployedContract)
   }
 }
 
