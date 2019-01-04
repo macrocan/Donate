@@ -18,8 +18,8 @@
 export default {
   methods: {
     address() {
-      console.log(this.$store.state.tronWeb.tronData.address)
-      return this.$store.state.tronWeb.tronData.address
+      console.log(this.$store.state.web3.web3Data.coinbase)
+      return this.$store.state.web3.web3Data.coinbase
     }
   }
 }

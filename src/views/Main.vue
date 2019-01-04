@@ -28,11 +28,12 @@ export default {
     NavMenu,
     Header
   },
-  async beforeCreate () {
+  beforeCreate () {
     console.log('register tron web Action dispatched from Home.vue')
-    if (!this.$store.state.tronWeb.tronData.instance){
-      await this.$store.dispatch('GET_TRON_INSTANCE')
-      await this.$store.dispatch('GET_FACTORY_INSTANCE')
+    if (!this.$store.state.web3.web3Data.web3Instance){
+      this.$store.dispatch('GET_WEB3_INSTANCE').then(() => {
+        this.$store.dispatch('GET_FACTORY_INSTANCE')
+      })
     }
   },
   computed: {
