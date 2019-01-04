@@ -1,4 +1,4 @@
 const ABI = [{"constant":false,"inputs":[{"name":"_amount","type":"uint256"},{"name":"_title","type":"string"},{"name":"_desc","type":"string"},{"name":"_materialHash","type":"int256"},{"name":"_materialUrl","type":"string"},{"name":"_donateToAddr","type":"address"}],"name":"createContract","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":true,"inputs":[],"name":"owner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getDeployedContracts","outputs":[{"name":"","type":"address[]"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"anonymous":false,"inputs":[{"indexed":true,"name":"previousOwner","type":"address"},{"indexed":true,"name":"newOwner","type":"address"}],"name":"OwnershipTransferred","type":"event"}]
-const address = "0xf520b8593b3cfc8bbe9cb0b3136edfb1d8c4b75f"
+const address = "0xB3845dFdB5B6516964DF7A9241b0cE00f3992b18"
 
 export {address, ABI}
