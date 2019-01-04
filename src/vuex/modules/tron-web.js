@@ -37,6 +37,12 @@ const actions = {
     const instance = state.factoryInstance
     const array = await instance.getDeployedContracts().call()
     console.log(array)
+  },
+  async CREATE_CONTRACT({state}, form) {
+    const instance = state.factoryInstance
+    const {amount, title, desc, materialHash, materialUrl, donateToAddr} = form
+    const result = await instance.createContract(amount, title, desc, materialHash, materialUrl, donateToAddr).send()
+    console.log(result)
   }
 }
 
