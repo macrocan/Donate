@@ -35,6 +35,52 @@ owner = newOwner;
 
 }
 
+/**
+ * @title SafeMath
+ * @dev Math operations with safety checks that throw on error
+ */
+library SafeMath {
+
+  /**
+  * @dev Multiplies two numbers, throws on overflow.
+  */
+  function mul(uint256 a, uint256 b) internal pure returns (uint256) {
+    if (a == 0) {
+      return 0;
+    }
+    uint256 c = a * b;
+    assert(c / a == b);
+    return c;
+  }
+
+  /**
+  * @dev Integer division of two numbers, truncating the quotient.
+  */
+  function div(uint256 a, uint256 b) internal pure returns (uint256) {
+    // assert(b > 0); // Solidity automatically throws when dividing by 0
+    uint256 c = a / b;
+    // assert(a == b * c + a % b); // There is no case in which this doesn't hold
+    return c;
+  }
+
+  /**
+  * @dev Subtracts two numbers, throws on overflow (i.e. if subtrahend is greater than minuend).
+  */
+  function sub(uint256 a, uint256 b) internal pure returns (uint256) {
+    assert(b <= a);
+    return a - b;
+  }
+
+  /**
+  * @dev Adds two numbers, throws on overflow.
+  */
+  function add(uint256 a, uint256 b) internal pure returns (uint256) {
+    uint256 c = a + b;
+    assert(c >= a);
+    return c;
+  }
+}
+
 contract DonateFactory is Ownable{
    address[] DonateContracts;
    function createContract(uint _amount,string _title, string _desc,int _materialHash,string _materialUrl, address _donateToAddr) public payable {
@@ -57,6 +103,7 @@ contract BaseDonateContract is Ownable {
 }
 
 contract SimpleDonateContract is BaseDonateContract{
+    using SafeMath for uint256;
     event Approval(address indexed owner, address indexed spender, uint256 value);
     event Transfer(address indexed from, address indexed to, uint256 value);
 
@@ -75,7 +122,7 @@ contract SimpleDonateContract is BaseDonateContract{
 
    
    function SimpleDonateContract(uint256 _amount, string _title, string _desc,int _materialHash,string _materialUrl, address _donateToAddr) public {
-      donateInfo.amount = _amount * 1 ether;
+      donateInfo.amount = _amount.mul(1 ether);
       donateInfo.title = _title;
       donateInfo.desc = _desc;
       donateInfo.materialHash = _materialHash;
@@ -126,7 +173,7 @@ contract SimpleDonateContract is BaseDonateContract{
    * @param _spender The address which will spend the funds.
    * @param _value The amount of tokens to be spent.
    */
-  function approve(address _spender, uint256 _value) public onlyOwner returns (bool) {
+  function approve(address _spender, uint256 _value) public onlyDonateTo returns (bool) {
     _value = _value.mul(1 ether);
     require(address(this).balance > _value);
     allowed[_spender] = _value;
@@ -149,7 +196,7 @@ contract SimpleDonateContract is BaseDonateContract{
    * the first transaction is mined)
    * From MonolithDAO Token.sol
    */
-  function increaseApproval(address _spender, uint _addedValue) onlyOwner
+  function increaseApproval(address _spender, uint _addedValue) onlyDonateTo
     returns (bool success) {
     _addedValue = _addedValue.mul(1 ether);
     allowed[_spender] = allowed[_spender].add(_addedValue);
@@ -157,7 +204,7 @@ contract SimpleDonateContract is BaseDonateContract{
     return true;
   }
 
-  function decreaseApproval(address _spender, uint _subtractedValue) onlyOwner
+  function decreaseApproval(address _spender, uint _subtractedValue) onlyDonateTo
     returns (bool success) {
     uint oldValue = allowed[_spender];
     _subtractedValue = _subtractedValue.mul(1 ether);
