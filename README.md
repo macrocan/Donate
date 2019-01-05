@@ -1,8 +1,8 @@
-solgan: 区块链，让善款更透明，让爱心更长情。
+### our solgan: 区块链，让善款更透明，让爱心更长情。
 
 我们认为，区块链技术的不可篡改、溯源等特性，可以有效解决当前善款使用/去向不透明，以及中心化平台存在的被黑客攻破、服务器崩溃以及作恶的道德风险。
 
-Below is framework
+下面是这个DAPP的框架图
 ![image](https://github.com/HiZhongxh/Donate/blob/master/framework.jpg?raw=true)
 
 说明：
